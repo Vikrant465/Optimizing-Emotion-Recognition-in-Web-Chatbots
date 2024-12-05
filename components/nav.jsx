@@ -137,11 +137,6 @@ export default function Nav() {
                 Guest Login
               </Button>
             </NavbarItem>
-            <NavbarItem>
-              <Button as={Link} color="primary" href="#sign-up" variant="flat">
-                Sign Up
-              </Button>
-            </NavbarItem>
           </>
         )}
       </NavbarContent>
