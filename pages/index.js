@@ -1,5 +1,7 @@
 import Nav from "../components/nav";
 import localFont from "next/font/local";
+// import { useSession, signOut } from "next-auth/react";
+// import { Button } from "@nextui-org/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,11 +15,13 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+  
+  
   return (
     <div>
       <Nav/>
       <div className="flex items-center justify-center h-screen">
-        <h1>hello there</h1>
+        <h1> hello there </h1>
       </div>
     </div>
   );
