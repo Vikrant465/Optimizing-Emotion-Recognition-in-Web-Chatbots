@@ -6,7 +6,7 @@ export default function Home1() {
       <div>
         <Nav/>
         <div className="flex items-center justify-center h-screen">
-          <h1>hello there, write your code here SHIVAM SINGH </h1>
+          <h1>hello there, </h1>
         </div>
       </div>
     );
