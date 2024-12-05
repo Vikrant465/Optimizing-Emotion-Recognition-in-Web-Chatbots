@@ -1,8 +1,9 @@
 import Nav from "../components/nav";
 import localFont from "next/font/local";
 import { useSession, signOut } from "next-auth/react";
-import { Button } from "@nextui-org/react";
-import {Spacer} from "@nextui-org/react";
+// import { Button } from "@nextui-org/react";
+import Test from '../components/space'
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -23,9 +24,11 @@ export default function Home() {
     return (
       <div>
         <Nav/>
+        <Test/>
         <div className="flex justify-center items-center h-screen">
           <p>You are not signed in.</p>
         </div>
+
         
       </div>
     );

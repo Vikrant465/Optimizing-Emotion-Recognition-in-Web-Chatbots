@@ -79,18 +79,18 @@ export default function Nav() {
       {/* Center Links */}
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#about">
+          <Link color="foreground" href="./about">
             About
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#chat-bot">
+          <Link color="foreground" href="./home">
             Chat Bot
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#contact">
-            Contact
+          <Link color="foreground" href="./">
+            Home
           </Link>
         </NavbarItem>
       </NavbarContent>
