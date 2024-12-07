@@ -12,7 +12,11 @@ export default  {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+
         a:"ffff"
+      },
+      backgroundImage: {
+        'hero-pattern': "url('/sp.jpg')",
       },
     },
   },
