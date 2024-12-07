@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+// eslint-disable react/no-unescaped-entities 
 
 import { Card, Skeleton, Accordion, AccordionItem } from "@nextui-org/react";
 import Nav from "../components/nav";
@@ -40,7 +40,7 @@ export default function Home1() {
           </AccordionItem>
           <AccordionItem key="4" title="🌍 Get Involved">
             <p className="text-gray-700">
-              We value collaboration! If you're passionate about AI, UI/UX design, or web development, share your
+              We value collaboration! If you&apos;re passionate about AI, UI/UX design, or web development, share your
               feedback and ideas to help us improve.
             </p>
           </AccordionItem>
