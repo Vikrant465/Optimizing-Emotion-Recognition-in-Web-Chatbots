@@ -11,7 +11,7 @@ export default function Home1() {
       <h1 className="text-4xl font-bold text-gray-800 mb-6">About Our Project</h1>
       <p className="text-center text-lg text-gray-600 max-w-2xl mb-10">
         Welcome to our <span className="font-bold">Emotion Prediction Chatbot</span>! This project uses AI-driven
-        emotion detection to provide meaningful and empathetic interactions. Here’s everything you need to know.
+        emotion detection to provide meaningful and empathetic interactions. Here&apos;s everything you need to know.
       </p>
 
       <div className="w-full max-w-3xl">
