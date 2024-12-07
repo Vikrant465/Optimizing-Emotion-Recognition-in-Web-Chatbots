@@ -29,7 +29,7 @@ export default function ChatBox() {
       const res = await axios.post("http://127.0.0.1:8000/process", {
         question: userInput,
       });
-      const botResponse = `AI "${res.data.ai_response}"`;
+      const botResponse = `${res.data.ai_response}`;
       // Simulate bot response
       setTimeout(() => {
         setMessages((prevMessages) => [
@@ -119,7 +119,7 @@ export default function ChatBox() {
         >
           Send
         </Button>
-        <button
+        <Button
           onClick={handleVoiceInput}
           className={`p-3 rounded-full ${
             isListening ? "bg-red-500" : "bg-gray-500"
@@ -127,7 +127,7 @@ export default function ChatBox() {
           title="Hold to speak"
         >
           🎤
-        </button>
+        </Button>
       </div>
     </div>
   );
