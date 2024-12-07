@@ -1,31 +1,53 @@
-
-
-
 import { useState } from "react";
+import { Button } from "@nextui-org/react";
+import axios from "axios";
 
 export default function ChatBox() {
   const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
   const [isListening, setIsListening] = useState(false);
+  const [userInput, setUserInput] = useState("");
+
+  // const handleSubmit = async () => {
+  //   try {
+  //     const res = await axios.post("http://127.0.0.1:8000/process", {
+  //       question: userInput,
+  //     });
+  //     setResponse(res.data);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   // Handle sending messages
-  const handleSend = () => {
-    if (!input.trim()) return;
-
+  
+  const handleSend = async() => {
+    if (!userInput.trim()) return;
     // Add user message
-    const newMessages = [...messages, { sender: "user", text: input }];
+    const newMessages = [...messages, { sender: "user", text: userInput}];
     setMessages(newMessages);
+    try {
+      const res = await axios.post("http://127.0.0.1:8000/process", {
+        question: userInput,
+      });
+      const botResponse = `AI "${res.data.ai_response}"`;
+      // Simulate bot response
+      setTimeout(() => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { sender: "bot", text: botResponse },
+        ]);
+      }, 500);
 
-    // Simulate bot response
-    setTimeout(() => {
-      const botResponse = `You said: "${input}"`;
+      // setResponse(res.data);
+    } catch (err) {
+      console.error(err);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { sender: "bot", text: botResponse },
+        { sender: "bot", text: "Error: Unable to fetch AI response." },
       ]);
-    }, 500);
+    }
 
-    setInput("");
+    setUserInput("");
   };
 
   // Handle voice input using the Web Speech API
@@ -52,7 +74,7 @@ export default function ChatBox() {
 
     speechRecognizer.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      setInput((prevInput) => prevInput + transcript);
+      setUserInput((prevInput) => prevInput + transcript);
     };
 
     speechRecognizer.onerror = (event) => {
@@ -85,17 +107,18 @@ export default function ChatBox() {
       <div className="flex items-center p-2 border-t">
         <input
           type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
           placeholder="Type a message..."
           className="flex-1 p-3 border rounded-l-lg"
         />
-        <button
+        <Button
           onClick={handleSend}
-          className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
+          color="primary"
+          // className=" px-4 py-2 rounded mx-2"
         >
           Send
-        </button>
+        </Button>
         <button
           onClick={handleVoiceInput}
           className={`p-3 rounded-full ${
