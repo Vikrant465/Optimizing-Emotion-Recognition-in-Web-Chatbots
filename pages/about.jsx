@@ -1,3 +1,5 @@
+// eslint-disable react/no-unescaped-entities 
+
 import { Card, Skeleton, Accordion, AccordionItem } from "@nextui-org/react";
 import Nav from "../components/nav";
 import Image from "next/image";
