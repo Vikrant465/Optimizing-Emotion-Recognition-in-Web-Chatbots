@@ -24,7 +24,6 @@ export default function Home() {
     return (
       <div>
         <Nav/>
-        <Test/>
         <div className="flex justify-center items-center h-screen">
           <p>You are not signed in.</p>
         </div>
