@@ -103,7 +103,7 @@ const Home = () => {
           <div className="flex flex-col items-start space-y-4">
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-text-light mb-2">
-              Welcom to Out BTP Project On<spam>Emotion Prediction</spam>
+              Welcome to Our BTP Project On<spam>Emotion Prediction</spam>
             </h1>
 
             {/* Typing Animation */}

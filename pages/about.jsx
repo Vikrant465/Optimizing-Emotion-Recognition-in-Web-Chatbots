@@ -14,19 +14,19 @@ const teamMembers = [
   },
   {
     name: "Atul Kumar Prajapati",
-    role: "UI/UX Designer",
-    photo: "/atu.jpg", // Replace with your image path   public\sp.jpg
+    role: "ML Expert",
+    photo: "/atu2.jpg", // Replace with your image path   public\sp.jpg
     linkedin: "https://www.linkedin.com/in/bob-smith/",
   },
   {
     name: "Shishu Pal Sharma",
-    role: "Backend Developer",
+    role: "UI/UX Designer",
     photo: "/sp.jpg", // Replace with your image path
     linkedin: "https://www.linkedin.com/in/charlie-davis/",
   },
   {
     name: "Shivam Singh",
-    role: "Backend Developer",
+    role: "ML model",
     photo: "/shi.jpg", // Replace with your image path
     linkedin: "https://www.linkedin.com/in/charlie-davis/",
   },
