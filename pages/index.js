@@ -78,7 +78,16 @@ const Home = () => {
         <Nav/>
         
         <div className="absolute h-screen inset-0 bg-opacity-10 bg-gradient-to-b from-transparent to-black pointer-events-none">
-          <h1>You are not login</h1>
+          <div className= "flex p-10">
+            <div className="p-10">
+              <h1>You are not login</h1>
+
+            </div>
+            <div>
+              <h1>hello there</h1>
+            </div>
+          </div>
+
         </div>
       </div>
     );

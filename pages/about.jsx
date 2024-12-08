@@ -16,7 +16,7 @@ const teamMembers = [
     name: "Atul Kumar Prajapati",
     role: "ML Expert",
     photo: "/atu2.jpg", // Replace with your image path   public\sp.jpg
-    linkedin: "https://www.linkedin.com/in/bob-smith/",
+    linkedin: "https://in.linkedin.com/in/atul9654",
   },
   {
     name: "Shishu Pal Sharma",
