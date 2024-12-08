@@ -11,10 +11,9 @@ export default  {
     extend: {
       colors: {
         background: "var(--background)",
-        a:"#808080",
         foreground: "var(--foreground)",
-
-        a:"ffff"
+        response : "#f7b750",
+        
       },
       backgroundImage: {
         'hero-pattern': "url('/sp.jpg')",

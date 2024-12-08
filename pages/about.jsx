@@ -7,27 +7,27 @@ import Image from "next/image";
 const teamMembers = [
   {
     name: "Vikrant Singh",
-    role: "AI Engineer",
-    photo: "/sp.jpg", // Replace with your image path
+    role: "Full Stack Developer",
+    photo: "/vik.jpg", // Replace with your image path
 
     linkedin: "https://www.linkedin.com/in/alice-johnson/",
   },
   {
     name: "Atul Kumar Prajapati",
     role: "UI/UX Designer",
-    // photo: "/team/bob.jpg", // Replace with your image path   public\sp.jpg
+    photo: "/atu.jpg", // Replace with your image path   public\sp.jpg
     linkedin: "https://www.linkedin.com/in/bob-smith/",
   },
   {
     name: "Shishu Pal Sharma",
     role: "Backend Developer",
-    // photo: "/team/charlie.jpg", // Replace with your image path
+    photo: "/sp.jpg", // Replace with your image path
     linkedin: "https://www.linkedin.com/in/charlie-davis/",
   },
   {
     name: "Shivam Singh",
     role: "Backend Developer",
-    // photo: "/team/charlie.jpg", // Replace with your image path
+    photo: "/shi.jpg", // Replace with your image path
     linkedin: "https://www.linkedin.com/in/charlie-davis/",
   },
 ];
@@ -36,11 +36,7 @@ export default function Home1() {
   return (
     <div>
       <Nav />
-      <div className="min-h-screen bg-slate-700 flex flex-col items-center py-10 px-5">
-        
-
-
-
+      <div className="min-h-screen flex flex-col items-center py-10 px-5">
         <h1 className="text-4xl font-bold text-gray-800 mb-6">About Our Project</h1>
         <p className="text-center text-lg text-gray-600 max-w-2xl mb-10">
           Welcome to our <span className="font-bold">Emotion Prediction Chatbot</span>! This project uses AI-driven

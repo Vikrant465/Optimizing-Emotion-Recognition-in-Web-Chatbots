@@ -7,14 +7,7 @@ export default function ChatBox() {
   const [isListening, setIsListening] = useState(false);
   const [userInput, setUserInput] = useState("");
 
-  // Ensure ResponsiveVoice is loaded
-  // useEffect(() => {
-  //   if (typeof window !== "undefined" && !window.responsiveVoice) {
-  //     console.error("ResponsiveVoice.js not loaded.");
-  //   } else {
-  //     console.log("ResponsiveVoice.js loaded.");
-  //   }
-  // }, []);
+  
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -108,7 +101,7 @@ export default function ChatBox() {
             className={`mb-4 p-3 max-w-xs ${
               message.sender === "user"
                 ? "bg-blue-300 self-start text-left rounded-r-lg"
-                : "bg-green-300 self-end text-right rounded-l-lg"
+                : "bg-response self-end text-right rounded-l-lg"
             }`}
           >
             {message.text}
