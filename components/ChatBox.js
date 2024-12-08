@@ -7,6 +7,7 @@ export default function ChatBox() {
   const [isListening, setIsListening] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [useremotion ,setuseremotion] =useState("")
+  const [botemotion,setbotemotion] = useState("")
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -42,7 +43,8 @@ export default function ChatBox() {
         ...prevMessages,
         { sender: "bot", text: botResponse },
       ]);
-      setuseremotion(res.data.predicted_emotion)
+      setuseremotion(res.data.user_predicted_emotion)
+      setbotemotion(res.data.predicted_emotion)
       console.log("user_emotion : ", res.data.user_predicted_emotion);
       console.log("AI_emotion : ", res.data.predicted_emotion);
       // Speak the bot's response
@@ -139,6 +141,7 @@ export default function ChatBox() {
       </div>
       <div className="w-1/3">
       <h2>emotion output :-  {useremotion}</h2>
+      <h1>emotion output :- {botemotion}</h1>
       </div>
     </div>
   );
