@@ -8,20 +8,20 @@ export default function ChatBox() {
   const [userInput, setUserInput] = useState("");
 
   // Ensure ResponsiveVoice is loaded
-  useEffect(() => {
-    if (typeof window !== "undefined" && !window.responsiveVoice) {
-      console.error("ResponsiveVoice.js not loaded.");
-    } else {
-      console.log("ResponsiveVoice.js loaded.");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined" && !window.responsiveVoice) {
+  //     console.error("ResponsiveVoice.js not loaded.");
+  //   } else {
+  //     console.log("ResponsiveVoice.js loaded.");
+  //   }
+  // }, []);
 
   // Speak the chatbot's response
   const speak = (text) => {
     if (window.responsiveVoice) {
       window.responsiveVoice.speak(text, "UK English Female", {
-        rate: 1.2, // Adjust the rate (speed) as needed
-        pitch: 1, // Adjust the pitch
+        rate: 1.15, // Adjust the rate (speed) as needed
+        pitch: 0.75, // Adjust the pitch
         volume: 1, // Adjust the volume (0-1)
       });
     } else {
@@ -41,13 +41,14 @@ export default function ChatBox() {
         question: userInput,
       });
       const botResponse = res.data.ai_response;
-
+      console.log("res : ",res)
       // Add bot response to messages
       setMessages((prevMessages) => [
         ...prevMessages,
         { sender: "bot", text: botResponse },
       ]);
-      console.log("emotion : ",res.data.predicted_emotion)
+      console.log("user_emotion : ",res.data.user_predicted_emotion)
+      console.log("AI_emotion : ",res.data.predicted_emotion)
       // Speak the bot's response
       speak(botResponse); // Speak the response
 
@@ -60,7 +61,6 @@ export default function ChatBox() {
       ]);
       speak(errorResponse); // Speak the error message
     }
-
     setUserInput("");
   };
 
