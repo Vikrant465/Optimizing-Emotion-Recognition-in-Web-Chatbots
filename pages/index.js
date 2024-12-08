@@ -4,6 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import { Button } from "@nextui-org/react";
 import Test from '../components/space'
 
+
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
 //   variable: "--font-geist-sans",
@@ -55,16 +56,32 @@ import Test from '../components/space'
 import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaEnvelope, FaDownload, FaYoutube } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
+import { useRouter } from "next/router";
 
 const Home = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const goToHome = () => {
+    router.push('/home');
+  };
   const [text] = useTypewriter({
-    words: ['Vikrant Singh', 'Shivam Singh', 'Shishu Pal Sharma', 'Atul Kumar Prajapati'],
+    words: ['Emotion Prediction', 'Ml Model', 'AI Support', 'Audio Capabilities'],
     loop: 0, // 0 = infinite
     typeSpeed: 70,
     deleteSpeed: 50,
     delaySpeed: 1000,
   });
-
+  
+  if(!session){
+    return(
+      <div>
+        <Nav/>
+        <div className="absolute inset-0 bg-opacity-10 bg-gradient-to-b from-transparent to-black pointer-events-none">
+          <h1>You are not login</h1>
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <Nav/>
@@ -85,7 +102,7 @@ const Home = () => {
           <div className="flex flex-col items-start space-y-4">
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-text-light mb-2">
-              Welcome To Our BTP Project
+              Welcom to Out BTP Project On<spam>Emotion Prediction</spam>
             </h1>
 
             {/* Typing Animation */}
@@ -101,7 +118,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1 }}
             >
-              Passionate about developing innovative solutions and automating workflows to enhance productivity.
+              AI powerde Emotion Prediction Bot.
             </motion.p>
 
             {/* Call to Action Button */}
@@ -109,17 +126,18 @@ const Home = () => {
               className="mt-6 px-5 sm:px-6 py-2 sm:py-3 bg-accent text-background rounded-full shadow-lg hover:bg-accent-light transition text-sm sm:text-base"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-              aria-label="Explore My Work"
+              // onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+              onClick={goToHome}
+              aria-label="Go to Chat Bot"
             >
-              Explore My Work
+              Go TO Chat Bot
             </motion.button>
           </div>
 
           {/* Right Column: Social & Contact Buttons */}
           <div className="flex flex-col items-start space-y-4">
             {/* Social & Contact Buttons */}
-            <div className="flex flex-wrap gap-4">
+            {/* <div className="flex flex-wrap gap-4">
               <a
                 href="mailto:rishabh26072003@gmail.com"
                 className="flex items-center space-x-2 bg-accent text-background px-4 py-2 rounded-full shadow-lg hover:bg-accent-light transition"
@@ -167,7 +185,8 @@ const Home = () => {
                 <FaDownload size={20} />
                 <span>Resume</span>
               </a>
-            </div>
+            </div> */}
+
           </div>
         </motion.div>
       </section>

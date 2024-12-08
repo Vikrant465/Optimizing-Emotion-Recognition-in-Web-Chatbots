@@ -53,7 +53,7 @@ export default function Nav() {
                         <NavbarItem>
                             <Button
                                 as="button"
-                                color="primary"
+                                color="danger"
                                 variant="flat"
                                 onClick={handleLogout}
                             >

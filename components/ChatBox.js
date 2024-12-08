@@ -37,7 +37,7 @@ export default function ChatBox() {
     setMessages(newMessages);
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/process", {
+      const res = await axios.post("https://nxbkkr-ip-110-235-216-44.tunnelmole.net", {
         question: userInput,
       });
       const botResponse = res.data.ai_response;
@@ -101,7 +101,7 @@ export default function ChatBox() {
   return (
     <div className="flex flex-col h-full bg-gray-100 items-center justify-center">
       {/* Messages Section */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 transition duration-700 ease-in-out overflow-y-auto p-4">
         {messages.map((message, index) => (
           <div
             key={index}
