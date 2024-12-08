@@ -31,7 +31,7 @@ export default function Home1() {
   //   </div>
   // );
   return(
-    <div>
+    <div className="">
       <Nav/>
       <ChatBox />
     </div>

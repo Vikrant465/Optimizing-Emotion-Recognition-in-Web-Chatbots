@@ -6,8 +6,8 @@ export default function ChatBox() {
   const [messages, setMessages] = useState([]);
   const [isListening, setIsListening] = useState(false);
   const [userInput, setUserInput] = useState("");
-  const [useremotion ,setuseremotion] =useState("")
-  const [botemotion,setbotemotion] = useState("")
+  const [useremotion, setuseremotion] = useState("");
+  const [botemotion, setbotemotion] = useState("");
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -30,12 +30,9 @@ export default function ChatBox() {
     setMessages(newMessages);
 
     try {
-      const res = await axios.post(
-        "https://sqfct8-ip-14-139-226-226.tunnelmole.net/process",
-        {
-          question: userInput,
-        }
-      );
+      const res = await axios.post("http://localhost:8000/process", {
+        question: userInput,
+      });
       const botResponse = res.data.ai_response;
       console.log("res : ", res);
       // Add bot response to messages
@@ -43,8 +40,8 @@ export default function ChatBox() {
         ...prevMessages,
         { sender: "bot", text: botResponse },
       ]);
-      setuseremotion(res.data.user_predicted_emotion)
-      setbotemotion(res.data.predicted_emotion)
+      setuseremotion(res.data.user_predicted_emotion);
+      setbotemotion(res.data.predicted_emotion);
       console.log("user_emotion : ", res.data.user_predicted_emotion);
       console.log("AI_emotion : ", res.data.predicted_emotion);
       // Speak the bot's response
@@ -95,6 +92,17 @@ export default function ChatBox() {
     speechRecognizer.start();
   };
 
+  const emotionImages = {
+    anger: "/emotions/anger.gif",
+    disgust: "/emotions/disgust.gif",
+    fear: "/emotions/fear.gif",
+    joy: "/emotions/happy.gif",
+    neutral: "/emotions/neutral.png",
+    sadness: "/emotions/sad.gif",
+    surprise: "/emotions/surprise.gif",
+  };
+  const emotions = Object.keys(emotionImages);
+
   return (
     <div className="h-screen flex">
       <div className="w-2/3">
@@ -140,8 +148,37 @@ export default function ChatBox() {
         </div>
       </div>
       <div className="w-1/3">
-      <h2>emotion input :-  {useremotion}</h2>
-      <h1>emotion output :- {botemotion}</h1>
+        <div>
+          {/* <h2>emotion input :- {useremotion}</h2>
+          <h1>emotion output :- {botemotion}</h1> */}
+          <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            {/* Display the Emotion Image */}
+            <div className="mb-8">
+              <img
+                src={emotionImages[botemotion]}
+                alt={botemotion}
+                className="rounded-lg shadow-lg max-w-sm"
+              />
+              <p className="mt-4 text-lg font-medium text-gray-700 capitalize">
+                Bot Emotion: {botemotion}
+              </p>
+            </div>
+
+            {/* Buttons to Change Emotion */}
+            {/* <div className="flex flex-wrap gap-4 justify-center">
+              {emotions.map((emotion) => (
+                <Button
+                  key={emotion}
+                  color={emotion === botemotion ? "primary" : "default"}
+                  onPress={() => setbotemotion(emotion)}
+                >
+                  {emotion}
+                </Button>
+              ))}
+            </div> */}
+          </div>
+        </div>
+        <div></div>
       </div>
     </div>
   );
