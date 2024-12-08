@@ -1,34 +1,69 @@
-
-
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@nextui-org/react";
+import axios from "axios";
 
 export default function ChatBox() {
   const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
   const [isListening, setIsListening] = useState(false);
+  const [userInput, setUserInput] = useState("");
 
-  // Handle sending messages
-  const handleSend = () => {
-    if (!input.trim()) return;
+  // Ensure ResponsiveVoice is loaded
+  // useEffect(() => {
+  //   if (typeof window !== "undefined" && !window.responsiveVoice) {
+  //     console.error("ResponsiveVoice.js not loaded.");
+  //   } else {
+  //     console.log("ResponsiveVoice.js loaded.");
+  //   }
+  // }, []);
+
+  // Speak the chatbot's response
+  const speak = (text) => {
+    if (window.responsiveVoice) {
+      window.responsiveVoice.speak(text, "UK English Female", {
+        rate: 1.15, // Adjust the rate (speed) as needed
+        pitch: 0.75, // Adjust the pitch
+        volume: 1, // Adjust the volume (0-1)
+      });
+    } else {
+      console.error("ResponsiveVoice is not available.");
+    }
+  };
+
+  const handleSend = async () => {
+    if (!userInput.trim()) return;
 
     // Add user message
-    const newMessages = [...messages, { sender: "user", text: input }];
+    const newMessages = [...messages, { sender: "user", text: userInput }];
     setMessages(newMessages);
 
-    // Simulate bot response
-    setTimeout(() => {
-      const botResponse = `You said: "${input}"`;
+    try {
+      const res = await axios.post("http://127.0.0.1:8000/process", {
+        question: userInput,
+      });
+      const botResponse = res.data.ai_response;
+      console.log("res : ",res)
+      // Add bot response to messages
       setMessages((prevMessages) => [
         ...prevMessages,
         { sender: "bot", text: botResponse },
       ]);
-    }, 500);
+      console.log("user_emotion : ",res.data.user_predicted_emotion)
+      console.log("AI_emotion : ",res.data.predicted_emotion)
+      // Speak the bot's response
+      speak(botResponse); // Speak the response
 
-    setInput("");
+    } catch (err) {
+      console.error(err);
+      const errorResponse = "Error: Unable to fetch AI response.";
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: "bot", text: errorResponse },
+      ]);
+      speak(errorResponse); // Speak the error message
+    }
+    setUserInput("");
   };
 
-  // Handle voice input using the Web Speech API
   const handleVoiceInput = () => {
     const recognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -52,7 +87,7 @@ export default function ChatBox() {
 
     speechRecognizer.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      setInput((prevInput) => prevInput + transcript);
+      setUserInput((prevInput) => prevInput + transcript);
     };
 
     speechRecognizer.onerror = (event) => {
@@ -66,13 +101,13 @@ export default function ChatBox() {
   return (
     <div className="flex flex-col h-full bg-gray-100 items-center justify-center">
       {/* Messages Section */}
-      <div className="flex-1 overflow-y-auto p-4 ">
+      <div className="flex-1 overflow-y-auto p-4">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`mb-4 p-3 max-w-xs   ${
+            className={`mb-4 p-3 max-w-xs ${
               message.sender === "user"
-                ? "bg-blue-300 self-start text-left rounded-r-lg  "
+                ? "bg-blue-300 self-start text-left rounded-r-lg"
                 : "bg-green-300 self-end text-right rounded-l-lg"
             }`}
           >
@@ -85,18 +120,15 @@ export default function ChatBox() {
       <div className="flex items-center p-2 border-t">
         <input
           type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
           placeholder="Type a message..."
           className="flex-1 p-3 border rounded-l-lg"
         />
-        <button
-          onClick={handleSend}
-          className="bg-blue-500 text-white px-4 py-2 rounded mx-2"
-        >
+        <Button onClick={handleSend} color="primary">
           Send
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={handleVoiceInput}
           className={`p-3 rounded-full ${
             isListening ? "bg-red-500" : "bg-gray-500"
@@ -104,11 +136,8 @@ export default function ChatBox() {
           title="Hold to speak"
         >
           🎤
-        </button>
+        </Button>
       </div>
     </div>
   );
 }
-
-
-

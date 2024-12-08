@@ -36,7 +36,7 @@ export default function Home1() {
   return (
     <div>
       <Nav />
-      <div className="min-h-screen bg-hero-pattern flex flex-col items-center py-10 px-5">
+      <div className="min-h-screen bg-slate-700 flex flex-col items-center py-10 px-5">
         
 
 
