@@ -10,7 +10,7 @@ const teamMembers = [
     role: "Full Stack Developer",
     photo: "/vik.jpg", // Replace with your image path
 
-    linkedin: "https://www.linkedin.com/in/alice-johnson/",
+    linkedin: "https://www.linkedin.com/in/vikrant172singh/",
   },
   {
     name: "Atul Kumar Prajapati",
@@ -22,13 +22,13 @@ const teamMembers = [
     name: "Shishu Pal Sharma",
     role: "UI/UX Designer",
     photo: "/sp.jpg", // Replace with your image path
-    linkedin: "https://www.linkedin.com/in/charlie-davis/",
+    linkedin: "https://www.linkedin.com/in/sps2001",
   },
   {
     name: "Shivam Singh",
     role: "ML model",
     photo: "/shi.jpg", // Replace with your image path
-    linkedin: "https://www.linkedin.com/in/charlie-davis/",
+    linkedin: "http://www.linkedin.com/in/shivam-singh-439004209",
   },
 ];
 

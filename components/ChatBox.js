@@ -6,8 +6,7 @@ export default function ChatBox() {
   const [messages, setMessages] = useState([]);
   const [isListening, setIsListening] = useState(false);
   const [userInput, setUserInput] = useState("");
-
-  
+  const [useremotion ,setuseremotion] =useState("")
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -30,21 +29,24 @@ export default function ChatBox() {
     setMessages(newMessages);
 
     try {
-      const res = await axios.post("https://sqfct8-ip-14-139-226-226.tunnelmole.net/process", {
-        question: userInput,
-      });
+      const res = await axios.post(
+        "https://sqfct8-ip-14-139-226-226.tunnelmole.net/process",
+        {
+          question: userInput,
+        }
+      );
       const botResponse = res.data.ai_response;
-      console.log("res : ",res)
+      console.log("res : ", res);
       // Add bot response to messages
       setMessages((prevMessages) => [
         ...prevMessages,
         { sender: "bot", text: botResponse },
       ]);
-      console.log("user_emotion : ",res.data.user_predicted_emotion)
-      console.log("AI_emotion : ",res.data.predicted_emotion)
+      setuseremotion(res.data.predicted_emotion)
+      console.log("user_emotion : ", res.data.user_predicted_emotion);
+      console.log("AI_emotion : ", res.data.predicted_emotion);
       // Speak the bot's response
       speak(botResponse); // Speak the response
-
     } catch (err) {
       console.error(err);
       const errorResponse = "Error: Unable to fetch AI response.";
@@ -92,44 +94,51 @@ export default function ChatBox() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gray-100 items-center justify-center">
-      {/* Messages Section */}
-      <div className="flex-1 transition duration-700 ease-in-out overflow-y-auto p-4">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`mb-4 p-3 max-w-xs ${
-              message.sender === "user"
-                ? "bg-blue-300 self-start text-left rounded-r-lg"
-                : "bg-response self-end text-right rounded-l-lg"
-            }`}
-          >
-            {message.text}
+    <div className="h-screen flex">
+      <div className="w-2/3">
+        <div className="flex flex-col h-full bg-gray-100 items-center justify-center">
+          {/* Messages Section */}
+          <div className="flex-1 transition duration-700 ease-in-out overflow-y-auto p-4">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`mb-4 p-3 max-w-xs ${
+                  message.sender === "user"
+                    ? "bg-blue-300 self-start text-left rounded-r-lg"
+                    : "bg-response self-end text-right rounded-l-lg"
+                }`}
+              >
+                {message.text}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {/* Input Section */}
-      <div className="flex items-center p-2 border-t">
-        <input
-          type="text"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Type a message..."
-          className="flex-1 p-3 border rounded-l-lg"
-        />
-        <Button onClick={handleSend} color="primary">
-          Send
-        </Button>
-        <Button
-          onClick={handleVoiceInput}
-          className={`p-3 rounded-full ${
-            isListening ? "bg-red-500" : "bg-gray-500"
-          } text-white`}
-          title="Hold to speak"
-        >
-          🎤
-        </Button>
+          {/* Input Section */}
+          <div className="flex items-center p-2 border-t">
+            <input
+              type="text"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              placeholder="Type a message..."
+              className="flex-1 p-3 border rounded-l-lg"
+            />
+            <Button onClick={handleSend} color="primary">
+              Send
+            </Button>
+            <Button
+              onClick={handleVoiceInput}
+              className={`p-3 rounded-full ${
+                isListening ? "bg-red-500" : "bg-gray-500"
+              } text-white`}
+              title="Hold to speak"
+            >
+              🎤
+            </Button>
+          </div>
+        </div>
+      </div>
+      <div className="w-1/3">
+      <h2>emotion output :-  {useremotion}</h2>
       </div>
     </div>
   );
