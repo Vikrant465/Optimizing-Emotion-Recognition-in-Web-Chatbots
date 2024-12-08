@@ -140,7 +140,7 @@ export default function ChatBox() {
         </div>
       </div>
       <div className="w-1/3">
-      <h2>emotion output :-  {useremotion}</h2>
+      <h2>emotion input :-  {useremotion}</h2>
       <h1>emotion output :- {botemotion}</h1>
       </div>
     </div>
