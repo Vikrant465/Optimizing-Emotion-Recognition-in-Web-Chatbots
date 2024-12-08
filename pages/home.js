@@ -1,4 +1,4 @@
-import Nav from "../components/nav";
+ import Nav from "../components/nav";
 //first code
 // export default function Home1() {
 //     return (
@@ -31,5 +31,11 @@ export default function Home1() {
     </div>
   );
 }
+
+
+
+
+
+
 
 
