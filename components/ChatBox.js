@@ -37,6 +37,7 @@ export default function ChatBox() {
           { sender: "bot", text: botResponse },
         ]);
       }, 500);
+      console.log("res : ",res.data.predicted_emotion)
 
       // setResponse(res.data);
     } catch (err) {
