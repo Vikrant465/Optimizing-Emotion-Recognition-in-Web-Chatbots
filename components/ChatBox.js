@@ -30,7 +30,7 @@ export default function ChatBox() {
     setMessages(newMessages);
 
     try {
-      const res = await axios.post("http://localhost:8000/process", {
+      const res = await axios.post("https://mz5rkk-ip-110-235-216-44.tunnelmole.net/process", {
         question: userInput,
       });
       const botResponse = res.data.ai_response;
