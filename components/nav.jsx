@@ -2,6 +2,7 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@n
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
+
 export default function Nav() {
     const { data: session } = useSession();
     const [isGuest, setIsGuest] = useState(false);
@@ -19,7 +20,7 @@ export default function Nav() {
         <Navbar shouldHideOnScroll>
             {/* Navbar Brand */}
             {<NavbarBrand>
-                <p className="font-bold text-inherit">BTP</p>
+                <p className="font-bold text-inherit ">BTP</p>
             </NavbarBrand>}
 
             {/* Center Links */}

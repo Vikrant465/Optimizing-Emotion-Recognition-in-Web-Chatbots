@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import {nextui} from "@nextui-org/react"
+
 export default  {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,6 +14,7 @@ export default  {
         background: "var(--background)",
         foreground: "var(--foreground)",
         response : "#f7b750",
+
         
       },
       backgroundImage: {

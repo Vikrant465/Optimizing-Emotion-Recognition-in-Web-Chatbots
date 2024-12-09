@@ -57,9 +57,11 @@ import { motion } from "framer-motion";
 import { FaLinkedin, FaGithub, FaEnvelope, FaDownload, FaYoutube } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { useRouter } from "next/router";
+import { useGuest } from "../components/GuestProvider";
 
 const Home = () => {
   const router = useRouter();
+  const { isGuest } = useGuest();
   const { data: session } = useSession();
   const goToHome = () => {
     router.push('/home');
@@ -72,13 +74,13 @@ const Home = () => {
     delaySpeed: 1000,
   });
   
-  if(!session){
+  if(!session && !isGuest){
     return(
       <div>
         <Nav/>
         
         <div className="absolute h-screen inset-0 bg-opacity-10 bg-gradient-to-b from-transparent to-black pointer-events-none">
-          <div className= "flex p-10">
+          <div className= "flex p-10 items-center justify-center">
             <div className="p-10">
               <h1>You are not login</h1>
 
@@ -146,56 +148,9 @@ const Home = () => {
 
           {/* Right Column: Social & Contact Buttons */}
           <div className="flex flex-col items-start space-y-4">
-            {/* Social & Contact Buttons */}
-            {/* <div className="flex flex-wrap gap-4">
-              <a
-                href="mailto:rishabh26072003@gmail.com"
-                className="flex items-center space-x-2 bg-accent text-background px-4 py-2 rounded-full shadow-lg hover:bg-accent-light transition"
-                aria-label="Email"
-              >
-                <FaEnvelope size={20} />
-                <span>Email</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/rishabhxchoudhary/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 bg-[#0077B5] text-background px-4 py-2 rounded-full shadow-lg hover:bg-primary-light transition"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin size={20} />
-                <span>LinkedIn</span>
-              </a>
-              <a
-                href="https://www.youtube.com/@rishabhxchoudhary"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 bg-red-600 text-background px-4 py-2 rounded-full shadow-lg hover:bg-[#FF0000] transition"
-                aria-label="YouTube"
-              >
-                <FaYoutube size={20} />
-                <span>YouTube</span>
-              </a>
-              <a
-                href="https://github.com/rishabhxchoudhary"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 bg-secondary text-background px-4 py-2 rounded-full shadow-lg hover:bg-secondary-light transition"
-                aria-label="GitHub"
-              >
-                <FaGithub size={20} />
-                <span>GitHub</span>
-              </a>
-              <a
-                href="/resume.pdf"
-                download="RishabhKumarChoudhary_Resume.pdf"
-                className="flex items-center space-x-2 bg-accent text-background px-4 py-2 rounded-full shadow-lg hover:bg-accent-light transition"
-                aria-label="Download Resume"
-              >
-                <FaDownload size={20} />
-                <span>Resume</span>
-              </a>
-            </div> */}
+            <div>
+
+            </div>
 
           </div>
         </motion.div>
