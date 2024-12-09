@@ -106,7 +106,7 @@ export default function ChatBox() {
   return (
     <div className="h-screen flex">
       <div className="w-2/3">
-        <div className="flex flex-col h-full bg-gray-100 items-center justify-center">
+        <div className="flex flex-col h-full items-center justify-center">
           {/* Messages Section */}
           <div className="flex-1 transition duration-700 ease-in-out overflow-y-auto p-4">
             {messages.map((message, index) => (
@@ -151,7 +151,7 @@ export default function ChatBox() {
         <div>
           {/* <h2>emotion input :- {useremotion}</h2>
           <h1>emotion output :- {botemotion}</h1> */}
-          <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+          <div className="flex flex-col items-center justify-center min-h-screen">
             {/* Display the Emotion Image */}
             <div className="mb-8">
               <img
@@ -159,7 +159,7 @@ export default function ChatBox() {
                 alt={botemotion}
                 className="rounded-lg shadow-lg max-w-sm"
               />
-              <p className="mt-4 text-lg font-medium text-gray-700 capitalize">
+              <p className="mt-4 text-lg font-medium text-amber-50 capitalize">
                 Bot Emotion: {botemotion}
               </p>
             </div>

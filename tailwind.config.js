@@ -19,6 +19,8 @@ export default  {
       },
       backgroundImage: {
         'hero-pattern': "url('/sp.jpg')",
+        'about1': "url('/about.jpg')",
+        'bot1' : "url('/bot.jpg')",
       },
     },
   },

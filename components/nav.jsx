@@ -1,11 +1,12 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
+// import { useGuest } from "./GuestContext";
 
 
 export default function Nav() {
     const { data: session } = useSession();
-    const [isGuest, setIsGuest] = useState(false);
+    const [isGuest, setIsGuest] = useState();
 
     const handleGuestLogin = () => {
         setIsGuest(true);
@@ -24,10 +25,10 @@ export default function Nav() {
             </NavbarBrand>}
 
             {/* Center Links */}
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
+            <NavbarContent className="hidden sm:flex gap-8" justify="center">
                 <NavbarItem>
-                    <Link color="foreground" href="./about">
-                        About
+                    <Link color="foreground" href="./">
+                        Home
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
@@ -36,8 +37,8 @@ export default function Nav() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="./">
-                        Home
+                    <Link color="foreground" href="./about">
+                        About
                     </Link>
                 </NavbarItem>
             </NavbarContent>

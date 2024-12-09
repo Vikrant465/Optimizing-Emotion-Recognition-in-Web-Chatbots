@@ -31,7 +31,7 @@ export default function Home1() {
   //   </div>
   // );
   return(
-    <div className="">
+    <div className="bg-bot1 bg-no-repeat bg-cover bg-center ">
       <Nav/>
       <ChatBox />
     </div>
