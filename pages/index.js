@@ -38,8 +38,8 @@ const Home = () => {
         <Nav/>f
 
         <div className="inset-0 bg-opacity-10 bg-gradient-to-b from-transparent to-black pointer-events-none">
-          <div className="flex-col p-10 items-center justify-center">
-            <div className="flex text-red-700 p-10 justify-center items-center">
+          <div className="flex-col  items-center justify-center">
+            <div className="flex text-red-700  justify-center items-center">
               <div className="bg-slate-400">
                 <h1>You are not login</h1>
               </div>
@@ -177,7 +177,13 @@ const Home = () => {
 
           {/* Right Column: Social & Contact Buttons */}
           <div className="flex flex-col items-start space-y-4">
-            <div></div>
+            <div>
+            <img
+                src={"/emotions/chatbot.gif"}
+                alt={"Bot image"}
+                className="rounded-lg shadow-lg max-w-sm"
+              />
+            </div>
           </div>
         </motion.div>
       </section>
