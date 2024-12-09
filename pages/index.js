@@ -54,7 +54,7 @@ const Home = () => {
                 meaningful and empathetic interactions. Here’s everything you
                 need to know.
               </p>
-              <div className="w-full max-w-3xl">
+              <div className="w-full max-w-3xl text-teal-500 text-lg font-medium">
                 <Accordion>
                   <AccordionItem key="1" title="🌟 Key Features">
                     <ul className="list-disc pl-5 text-gray-700">
