@@ -36,9 +36,6 @@ export default function Home1() {
   return (
     <div className="">
       <Nav />
-    
-
-
       <div className=" min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
         <h2 className="text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-400 to-gold py-4 mb-8 font-serif drop-shadow-2xl tracking-wide uppercase border-b-4 border-gold max-w-4xl mx-auto">
           Our Team

@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 // Create the context
 const GuestContext = createContext();
 
-// Provider to wrap the app and provide the state
+// GuestProvider to wrap the app
 export const GuestProvider = ({ children }) => {
     const [isGuest, setIsGuest] = useState(false);
 
@@ -15,5 +15,11 @@ export const GuestProvider = ({ children }) => {
     );
 };
 
-// Hook to access the context
-export const useGuest = () => useContext(GuestContext);
+// Hook to use the context
+export const useGuest = () => {
+    const context = useContext(GuestContext);
+    if (!context) {
+        throw new Error("useGuest must be used within a GuestProvider");
+    }
+    return context; // Returns { isGuest, setIsGuest }
+};

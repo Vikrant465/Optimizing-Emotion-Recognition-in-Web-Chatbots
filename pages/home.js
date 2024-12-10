@@ -1,19 +1,8 @@
- import Nav from "../components/nav";
-//first code
-// export default function Home1() {
-//     return (
-//       <div>
-//         <Nav/>
-//         <div  className="flex items-center justify-center h-screen bg-a">
-//           <h1>hello there, </h1>
-//         </div>
-//       </div>
-//     );
-//   }
+import Nav from "../components/nav";
 
 //second code
 import ChatBox from "../components/ChatBox";
-import EmojiPanel from "../components/EmojiPanel";
+
 
 export default function Home1() {
   // return (
