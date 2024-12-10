@@ -2,6 +2,7 @@ import Nav from "../components/nav";
 import ChatBox from "../components/ChatBox";
 import { useSession, signOut } from "next-auth/react";
 import { useGuest } from "../components/GuestProvider";
+import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 export default function Home1() {
   // return (
@@ -20,12 +21,24 @@ export default function Home1() {
   // );
   const { data: session } = useSession();
   const { isGuest } = useGuest();
-  if(!session && !isGuest){
-    return(
+  const [text] = useTypewriter({
+    words: [
+      "Login to Access to About Section",
+    ],
+    loop: 0, // 0 = infinite
+    typeSpeed: 70,
+    deleteSpeed: 50,
+    delaySpeed: 1000,
+  });
+  if (!session && !isGuest) {
+    return (
       <div className="relative bg-about1 p-5 h-screen justify-items-center ">
-          <Nav/>
+        <Nav />
         <div className="flex-col text-xl justify-center items-center h-5 text-red-600">
-          <h1>Login to Access to Chat Bot Section</h1>
+          <p className="text-xl sm:text-2xl md:text-3xl text-text-dark">
+            <span>{text}</span>
+            <Cursor />
+          </p>
         </div>
         <div className="flex-col items-end ...">
           <h2 className="text-7xl ">Emotion Prediction</h2>
@@ -34,9 +47,9 @@ export default function Home1() {
       </div>
     );
   }
-  return(
+  return (
     <div className="bg-bot1 bg-no-repeat bg-cover bg-center ">
-      <Nav/>
+      <Nav />
       <ChatBox />
     </div>
   );

@@ -5,7 +5,9 @@ import Nav from "../components/nav";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useGuest } from "../components/GuestProvider";
+import { motion } from "framer-motion";
 
+import { useTypewriter, Cursor } from "react-simple-typewriter";
 const teamMembers = [
   {
     name: "Vikrant Singh",
@@ -37,12 +39,25 @@ const teamMembers = [
 export default function Home1() {
   const { data: session } = useSession();
   const { isGuest } = useGuest();
-  if(!session && !isGuest){
-    return(
+  const [text] = useTypewriter({
+    words: [
+      "Login to Access to About Section",
+    ],
+    loop: 0, // 0 = infinite
+    typeSpeed: 70,
+    deleteSpeed: 50,
+    delaySpeed: 1000,
+  });
+
+  if (!session && !isGuest) {
+    return (
       <div className="relative bg-about1 p-5 h-screen justify-items-center ">
-          <Nav/>
+        <Nav />
         <div className="flex-col text-xl justify-center items-center h-5 text-red-600">
-          <h1>Login to Access to About Section</h1>
+          <p className="text-xl sm:text-2xl md:text-3xl text-text-dark">
+            <span>{text}</span>
+            <Cursor />
+          </p>
         </div>
         <div className="flex-col items-end ...">
           <h2 className="text-7xl ">Emotion Prediction</h2>

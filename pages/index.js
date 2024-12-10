@@ -128,7 +128,7 @@ const Home = () => {
           <div className="flex flex-col items-start space-y-4">
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-text-light mb-2">
-              Welcome to Our BTP Project On<spam>Emotion Prediction</spam>
+              Welcome to Our BTP Project On<spam> Emotion Prediction</spam>
             </h1>
 
             {/* Typing Animation */}
@@ -164,11 +164,14 @@ const Home = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  window.location.href = "https://docs.google.com/presentation/d/1hD8uWVO3FXLT4eIKOqaE0AIaiGo8vgxoGZuQ-hEFzIk/edit#slide=id.g32109155b0f_3_0";
+                  window.open(
+                    "https://docs.google.com/presentation/d/1hD8uWVO3FXLT4eIKOqaE0AIaiGo8vgxoGZuQ-hEFzIk/edit#slide=id.g32109155b0f_3_0",
+                    "_blank"
+                  );
                 }}
                 aria-label="Go to PPT"
               >
-                Go PPT
+                Go To PPT
               </motion.button>
             </div>
           </div>
