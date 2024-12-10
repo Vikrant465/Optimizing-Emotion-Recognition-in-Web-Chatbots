@@ -148,16 +148,29 @@ const Home = () => {
             </motion.p>
 
             {/* Call to Action Button */}
-            <motion.button
-              className="mt-6 px-5 sm:px-6 py-2 sm:py-3 bg-accent text-background rounded-full shadow-lg hover:bg-accent-light transition text-sm sm:text-base"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              // onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-              onClick={goToHome}
-              aria-label="Go to Chat Bot"
-            >
-              Go TO Chat Bot
-            </motion.button>
+            <div className="flex space-x-4">
+              <motion.button
+                className="px-5 sm:px-6 py-2 sm:py-3 bg-accent text-background rounded-full shadow-lg hover:bg-accent-light transition text-sm sm:text-base"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={goToHome}
+                aria-label="Go to Chat Bot"
+              >
+                Go TO Chat Bot
+              </motion.button>
+
+              <motion.button
+                className="px-5 sm:px-6 py-2 sm:py-3 bg-accent text-background rounded-full shadow-lg hover:bg-accent-light transition text-sm sm:text-base"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  window.location.href = "https://docs.google.com/presentation/d/1hD8uWVO3FXLT4eIKOqaE0AIaiGo8vgxoGZuQ-hEFzIk/edit#slide=id.g32109155b0f_3_0";
+                }}
+                aria-label="Go to PPT"
+              >
+                Go PPT
+              </motion.button>
+            </div>
           </div>
 
           {/* Right Column: Social & Contact Buttons */}
