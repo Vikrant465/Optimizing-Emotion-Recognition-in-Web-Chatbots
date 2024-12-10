@@ -1,8 +1,7 @@
 import Nav from "../components/nav";
-
-//second code
 import ChatBox from "../components/ChatBox";
-
+import { useSession, signOut } from "next-auth/react";
+import { useGuest } from "../components/GuestProvider";
 
 export default function Home1() {
   // return (
@@ -19,6 +18,22 @@ export default function Home1() {
   //     </div>
   //   </div>
   // );
+  const { data: session } = useSession();
+  const { isGuest } = useGuest();
+  if(!session && !isGuest){
+    return(
+      <div className="relative bg-about1 p-5 h-screen justify-items-center ">
+          <Nav/>
+        <div className="flex-col text-xl justify-center items-center h-5 text-red-600">
+          <h1>Login to Access to Chat Bot Section</h1>
+        </div>
+        <div className="flex-col items-end ...">
+          <h2 className="text-7xl ">Emotion Prediction</h2>
+          {/* <div className="">hello</div> */}
+        </div>
+      </div>
+    );
+  }
   return(
     <div className="bg-bot1 bg-no-repeat bg-cover bg-center ">
       <Nav/>

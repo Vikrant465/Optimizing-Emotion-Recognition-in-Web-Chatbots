@@ -3,6 +3,8 @@
 import { Card, Skeleton, Accordion, AccordionItem } from "@nextui-org/react";
 import Nav from "../components/nav";
 import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
+import { useGuest } from "../components/GuestProvider";
 
 const teamMembers = [
   {
@@ -33,6 +35,22 @@ const teamMembers = [
 ];
 
 export default function Home1() {
+  const { data: session } = useSession();
+  const { isGuest } = useGuest();
+  if(!session && !isGuest){
+    return(
+      <div className="relative bg-about1 p-5 h-screen justify-items-center ">
+          <Nav/>
+        <div className="flex-col text-xl justify-center items-center h-5 text-red-600">
+          <h1>Login to Access to About Section</h1>
+        </div>
+        <div className="flex-col items-end ...">
+          <h2 className="text-7xl ">Emotion Prediction</h2>
+          {/* <div className="">hello</div> */}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="">
       <Nav />
