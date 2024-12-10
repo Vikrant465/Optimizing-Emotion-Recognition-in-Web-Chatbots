@@ -23,7 +23,7 @@ export default function Home1() {
   const { isGuest } = useGuest();
   const [text] = useTypewriter({
     words: [
-      "Login to Access to About Section",
+      "Login to Access, the Bot Section",
     ],
     loop: 0, // 0 = infinite
     typeSpeed: 70,
