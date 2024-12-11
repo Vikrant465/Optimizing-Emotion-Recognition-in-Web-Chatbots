@@ -30,7 +30,7 @@ const teamMembers = [
   },
   {
     name: "Shivam Singh",
-    role: "ML model",
+    role: "ML Expert",
     photo: "/shi.jpg", // Replace with your image path
     linkedin: "http://www.linkedin.com/in/shivam-singh-439004209",
   },

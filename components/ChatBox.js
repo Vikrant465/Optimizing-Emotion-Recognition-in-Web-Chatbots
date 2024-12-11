@@ -28,7 +28,7 @@ export default function ChatBox() {
     const newMessages = [...messages, { sender: "user", text: userInput }];
     setMessages(newMessages);
     try {
-      const res = await axios.post("https://nugcfy-ip-14-139-226-226.tunnelmole.net/process", {
+      const res = await axios.post("https://oimc1c-ip-14-139-226-226.tunnelmole.net/process", {
         question: userInput,
       });
       const botResponse = res.data.ai_response;
