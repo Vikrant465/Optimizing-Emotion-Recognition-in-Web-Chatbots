@@ -13,7 +13,7 @@ export default function ChatBox() {
   const speak = (text) => {
     if (window.responsiveVoice) {
       window.responsiveVoice.speak(text, "UK English Female", {
-        rate: 1.15, // Adjust the rate (speed) as needed
+        rate: 1, // Adjust the rate (speed) as needed
         pitch: 0.75, // Adjust the pitch
         volume: 1, // Adjust the volume (0-1)
       });
@@ -28,7 +28,7 @@ export default function ChatBox() {
     const newMessages = [...messages, { sender: "user", text: userInput }];
     setMessages(newMessages);
     try {
-      const res = await axios.post("https://oimc1c-ip-14-139-226-226.tunnelmole.net/process", {
+      const res = await axios.post("https://dp1gqf-ip-14-139-226-226.tunnelmole.net/process", {
         question: userInput,
       });
       const botResponse = res.data.ai_response;
@@ -102,7 +102,7 @@ export default function ChatBox() {
   const emotions = Object.keys(emotionImages);
 
   return (
-    <div className="h-screen flex">
+    <div className=" h-screen flex">
       <div className="w-2/3">
         <div className="flex flex-col h-full items-center justify-center">
           {/* Messages Section */}
