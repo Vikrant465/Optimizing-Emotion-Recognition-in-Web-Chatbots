@@ -28,9 +28,10 @@ export default function ChatBox() {
     const newMessages = [...messages, { sender: "user", text: userInput }];
     setMessages(newMessages);
     try {
-      const res = await axios.post("https://89g5wf-ip-14-139-226-226.tunnelmole.net/process", {
+      const res = await axios.post("http://localhost:8000/process", {
         question: userInput,
       });
+      // http://localhost:8000/
       const botResponse = res.data.ai_response;
       console.log("res : ", res);
       // Add bot response to messages
@@ -127,6 +128,9 @@ export default function ChatBox() {
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSend();
+              }}
               placeholder="Type a message..."
               className="flex-1 p-3 border rounded-l-lg"
             />
