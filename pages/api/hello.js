@@ -9,7 +9,7 @@ import clientPromise from "../../lib/mongodb"; // Ensure this file exists as per
 
 export default async function handler(req, res) {
   console.log("Request method:", req.method);
-  if (req.method !== "POST") {
+  if (req.method !== "post") {
     return res.status(405).json({ success: false, message: "Method not allowed" });
   }
 
