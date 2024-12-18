@@ -57,6 +57,11 @@ export default function ChatBox() {
         user_msg: userInput,
         AI_response: botResponse,
       });
+      // await axios.post("/api/addMessage", {
+      //   email,
+      //   user_msg: userInput,
+      //   AI_response: botResponse,
+      // });
       console.log("Document added to MongoDB");
 
     } catch (err) {
