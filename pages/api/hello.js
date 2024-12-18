@@ -34,7 +34,9 @@ import clientPromise from "../../lib/mongodb"; // Ensure this file exists as per
 //     return res.status(500).json({ success: false, message: "Database error" });
 //   }
 // }
-
+export const config = {
+  maxDuration: 60,
+};
 
 export default async function handler(req, res) {
   try {
