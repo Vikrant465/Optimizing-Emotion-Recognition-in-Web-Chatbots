@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useGuest } from "../components/GuestProvider";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
 
@@ -8,6 +10,8 @@ export default function ChatBox() {
   const [userInput, setUserInput] = useState("");
   const [useremotion, setuseremotion] = useState("");
   const [botemotion, setbotemotion] = useState("");
+  const { data: session } = useSession();
+  const { isGuest } = useGuest();
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -45,6 +49,16 @@ export default function ChatBox() {
       console.log("AI_emotion : ", res.data.predicted_emotion);
       // Speak the bot's response
       speak(botResponse); // Speak the response
+      // DB setup
+      const email = session?.user?.email;
+      console.log("email : ",email)
+      await axios.post("/api/hello",{
+        email,
+        user_msg: userInput,
+        AI_response: botResponse,
+      });
+      console.log("Document added to MongoDB");
+
     } catch (err) {
       console.error(err);
       const errorResponse = "Error: Unable to fetch AI response.";
