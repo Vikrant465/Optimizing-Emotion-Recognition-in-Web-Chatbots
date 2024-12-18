@@ -52,19 +52,15 @@ export default function ChatBox() {
       // DB setup
       const email = session?.user?.email;
       console.log("email : ",email)
-      const timestamp1 = Date.now();
+      // const timestamp1 = Date.now();
       // DB access begin 
       await axios.post("/api/hello",{
         email,
         user_msg: userInput,
         AI_response: botResponse,
-        timestamp1,
+        
       });
-      // await axios.post("/api/addMessage", {
-      //   email,
-      //   user_msg: userInput,
-      //   AI_response: botResponse,
-      // });
+      
       console.log("Document added to MongoDB");
 
     } catch (err) {
