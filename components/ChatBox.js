@@ -32,7 +32,7 @@ export default function ChatBox() {
     const newMessages = [...messages, { sender: "user", text: userInput }];
     setMessages(newMessages);
     try {
-      const res = await axios.post("https://c9gvxe-ip-122-162-149-67.tunnelmole.net/process", {
+      const res = await axios.post("https://rpyuut-ip-122-162-149-67.tunnelmole.net/process", {
         question: userInput,
       });
       // http://localhost:8000/
@@ -52,10 +52,12 @@ export default function ChatBox() {
       // DB setup
       const email = session?.user?.email;
       console.log("email : ",email)
+      const timestamp1 = Date.now();
       await axios.post("/api/hello",{
         email,
         user_msg: userInput,
         AI_response: botResponse,
+        timestamp1,
       });
       // await axios.post("/api/addMessage", {
       //   email,
