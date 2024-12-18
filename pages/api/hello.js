@@ -8,29 +8,47 @@
 import { timeStamp } from "console";
 import clientPromise from "../../lib/mongodb"; // Ensure this file exists as per earlier setup
 
+// export default async function handler(req, res) {
+  
+//   if (req.method !== "POST") {
+//     console.log("Request method:", req.method);
+//     return res.status(405).json({ success: false, message: "Method not allowed" });
+//   }
+
+//   const { email, user_msg, AI_response } = req.body;
+
+//   if (!email || !user_msg || !AI_response) {
+//     return res.status(400).json({ success: false, message: "Missing required fields" });
+//   }
+
+//   try {
+//     const client = await clientPromise;
+//     const db = client.db("Chat_emotion"); // Your database name
+//     const collection = db.collection("email"); // Your collection name
+
+//     const result = await collection.insertOne({ email, user_msg, AI_response });
+
+//     return res.status(200).json({ success: true, message: "Document added", result });
+//   } catch (error) {
+//     console.error("MongoDB Insertion Error:", error);
+//     return res.status(500).json({ success: false, message: "Database error" });
+//   }
+// }
+
+
 export default async function handler(req, res) {
-  console.log("Request method:", req.method);
-  if (req.method !== "POST") {
-    return res.status(405).json({ success: false, message: "Method not allowed" });
-  }
-
-  const { email, user_msg, AI_response } = req.body;
-
-  if (!email || !user_msg || !AI_response) {
-    return res.status(400).json({ success: false, message: "Missing required fields" });
-  }
-
   try {
+    // Connect to the database
     const client = await clientPromise;
-    const db = client.db("Chat_emotion"); // Your database name
-    const collection = db.collection("email"); // Your collection name
+    const db = client.db("Chat_emotion"); // Replace "test" with your database name
 
-    const result = await collection.insertOne({ email, user_msg, AI_response });
+    // Example query: Fetch data from a collection
+    const data = await db.collection("email").find({}).toArray();
 
-    return res.status(200).json({ success: true, message: "Document added", result });
-  } catch (error) {
-    console.error("MongoDB Insertion Error:", error);
-    return res.status(500).json({ success: false, message: "Database error" });
+    // Send response
+    res.status(200).json({ success: true, data });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ success: false, message: "Cannot connect to MongoDB" });
   }
 }
-

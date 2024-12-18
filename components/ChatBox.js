@@ -45,14 +45,15 @@ export default function ChatBox() {
       ]);
       setuseremotion(res.data.user_predicted_emotion);
       setbotemotion(res.data.predicted_emotion);
-      console.log("user_emotion : ", res.data.user_predicted_emotion);
-      console.log("AI_emotion : ", res.data.predicted_emotion);
+      // console.log("user_emotion : ", res.data.user_predicted_emotion);
+      // console.log("AI_emotion : ", res.data.predicted_emotion);
       // Speak the bot's response
       speak(botResponse); // Speak the response
       // DB setup
       const email = session?.user?.email;
       console.log("email : ",email)
       const timestamp1 = Date.now();
+      // DB access begin 
       await axios.post("/api/hello",{
         email,
         user_msg: userInput,
