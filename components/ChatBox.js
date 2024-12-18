@@ -125,7 +125,7 @@ export default function ChatBox() {
       <div className="w-2/3">
         <div className="flex flex-col h-full items-center justify-center">
           {/* Messages Section */}
-          <div className="flex-1 transition duration-700 ease-in-out overflow-y-auto p-4">
+          <div className="flex-1 transition duration-700 ease-in-out overflow-y-auto p-4 pt-20">
             {messages.map((message, index) => (
               <div
                 key={index}
