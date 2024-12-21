@@ -14,7 +14,7 @@ export default  {
         background: "var(--background)",
         foreground: "var(--foreground)",
         response : "#f7b750",
-
+        a : "#d4d4d4"
         
       },
       backgroundImage: {

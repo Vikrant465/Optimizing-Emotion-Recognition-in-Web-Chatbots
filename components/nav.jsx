@@ -1,9 +1,10 @@
-
-
 import {
   Navbar,
   NavbarBrand,
+  NavbarMenuToggle,
   NavbarContent,
+  NavbarMenu,
+  NavbarMenuItem,
   NavbarItem,
   Link,
   Button,
@@ -27,6 +28,7 @@ export default function Nav() {
   const { isGuest, setIsGuest } = useGuest(); // Access global state and setter
   const { isOpen, onOpen, onOpenChange } = useDisclosure(); // Modal state
   const [guestName, setGuestName] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleGuestLogin = () => {
     // Show modal when "Guest Login" is clicked
@@ -47,6 +49,11 @@ export default function Nav() {
     setGuestName(""); // Clear guest name
     signOut(); // Optional: Sign out session user
   };
+  const menuItems = [
+    { name: "Home", href: "./" },
+    { name: "Chat Bot", href: "./home" },
+    { name: "About", href: "./about1" },
+  ];
 
   return (
     <>
@@ -85,14 +92,20 @@ export default function Nav() {
       </Modal>
 
       {/* Navbar */}
-      <Navbar shouldHideOnScroll>
-        {/* Navbar Brand */}
-        <NavbarBrand>
-          <p className="font-bold text-inherit">BTP</p>
-        </NavbarBrand>
+      <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} >
+
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+          <NavbarBrand>
+            <p className="font-bold text-inherit pl-2">BTP</p>
+          </NavbarBrand>
+        </NavbarContent>
 
         {/* Center Links */}
-        <NavbarContent className="hidden sm:flex gap-8" justify="center">
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem>
             <Link color="foreground" href="./">
               Home
@@ -104,7 +117,7 @@ export default function Nav() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="./about">
+            <Link color="foreground" href="./about1">
               About
             </Link>
           </NavbarItem>
@@ -157,6 +170,22 @@ export default function Nav() {
             </>
           )}
         </NavbarContent>
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item.name}-${index}`}>
+              <Link
+                className="w-full"
+                color={
+                  index === 1 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                }
+                href={item.href}
+                size="lg"
+              >
+                {item.name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
       </Navbar>
     </>
   );
