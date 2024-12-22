@@ -35,7 +35,7 @@ const Home = () => {
     return (
       <div>
         <Nav />
-        <div className="inset-0 bg-opacity-10 bg-about1">
+        <div className="inset-0 bg-opacity-10 bg-about1 bg-no-repeat bg-cover bg-center">
           <div className="flex-col items-center justify-center">
             <div className="flex text-red-700 justify-center items-center">
               <div className="text-2xl">
