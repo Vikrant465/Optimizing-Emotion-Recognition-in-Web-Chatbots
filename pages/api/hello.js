@@ -24,13 +24,20 @@ export default async function handler(req, res) {
   if (!email || !user_msg || !AI_response) {
     return res.status(400).json({ success: false, message: "Missing required fields" });
   }
-
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = String(date.getFullYear()).slice(-2); // Get the last 2 digits of the year
+  
+    return `${day}/${month}/${year}`;
+  }
   try {
     const client = await clientPromise;
     const db = client.db("Chat_emotion"); // Your database name
     const collection = db.collection("email"); // Your collection name
+    const today = new Date();
 
-    const result = await collection.insertOne({ email, user_msg, AI_response, timeStamp : Date.now() });
+    const result = await collection.insertOne({ email, user_msg, AI_response, timeStamp : formatDate(today) });
 
     return res.status(200).json({ success: true, message: "Document added", result });
   } catch (error) {
