@@ -42,8 +42,7 @@ export default function ChatBox() {
       ]);
       setuseremotion(res.data.user_predicted_emotion);
       setbotemotion(res.data.predicted_emotion);
-      // console.log("user_emotion : ", res.data.user_predicted_emotion);
-      // console.log("AI_emotion : ", res.data.predicted_emotion);
+    
       // Speak the bot's response
       speak(botResponse); // Speak the response
       // DB setup

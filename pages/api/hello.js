@@ -49,7 +49,7 @@ export default async function handler(req, res) {
     const collection = db.collection("email"); // Your collection name
     const today = new Date();
 
-    const result = await collection.insertOne({ email, user_msg, AI_response, timeStamp : formatDate(today) });
+    const result = await collection.insertOne({ email,timeStamp : formatDate(today), user_msg, AI_response });
 
     return res.status(200).json({ success: true, message: "Document added", result });
   } catch (error) {
