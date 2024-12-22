@@ -18,7 +18,7 @@ export default function Home1() {
   });
   if (!session && !isGuest) {
     return (
-      <div className="relative bg-about1 p-5 h-screen justify-items-center ">
+      <div className="relative bg-about1 bg-no-repeat bg-cover bg-center p-5 h-screen justify-items-center ">
         <Nav />
         <div className="flex-col text-xl justify-center items-center h-5 text-red-600">
           <p className="text-xl sm:text-2xl md:text-3xl text-text-dark">
