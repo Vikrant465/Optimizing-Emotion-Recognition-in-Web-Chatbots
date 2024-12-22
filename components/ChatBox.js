@@ -32,10 +32,7 @@ export default function ChatBox() {
     const newMessages = [...messages, { sender: "user", text: userInput }];
     setMessages(newMessages);
     try {
-      const res = await axios.post("http://localhost:8000/process", {
-        question: userInput,
-      });
-      // http://localhost:8000/
+      const res = await axios.post("/api/ml", { question: userInput });
       const botResponse = res.data.ai_response;
       console.log("res : ", res);
       // Add bot response to messages
