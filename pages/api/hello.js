@@ -24,13 +24,25 @@ export default async function handler(req, res) {
   if (!email || !user_msg || !AI_response) {
     return res.status(400).json({ success: false, message: "Missing required fields" });
   }
+  // function formatDate(date) {
+  //   const day = String(date.getDate()).padStart(2, '0');
+  //   const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  //   const year = String(date.getFullYear()).slice(-2); // Get the last 2 digits of the year
+  
+  //   return `${day}/${month}/${year}`;
+  // }
   function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
     const year = String(date.getFullYear()).slice(-2); // Get the last 2 digits of the year
   
-    return `${day}/${month}/${year}`;
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
   }
+  
   try {
     const client = await clientPromise;
     const db = client.db("Chat_emotion"); // Your database name

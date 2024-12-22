@@ -13,8 +13,8 @@ export default async function handler(req, res) {
 
   try {
     // Use the environment variable for the external API URL
-    const apiUrl = process.env.NEXT_PUBLIC_EXTERNAL_API_URL;
-
+    // const apiUrl = process.env.NEXT_PUBLIC_EXTERNAL_API_URL;
+    const apiUrl = "https://hc7gxm-ip-122-162-147-184.tunnelmole.net/process"
     if (!apiUrl) {
       throw new Error("External API URL is not defined in environment variables.");
     }
