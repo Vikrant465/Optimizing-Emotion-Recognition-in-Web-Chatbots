@@ -12,8 +12,8 @@ export default async function handler(req, res) {
   }
 
   try {
-
     const apiUrl = process.env.NEXT_PUBLIC_EXTERNAL_API_URL;
+    
     console.log("url : ",apiUrl)
     if (!apiUrl) {
       throw new Error("External API URL is not defined in environment variables.");
