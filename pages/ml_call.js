@@ -30,7 +30,7 @@ const Home = () => {
         {response && (
             <div>
             <p>AI Response: {response.ai_response}</p>
-            <p>Emotion: {response.predicted_emotion}</p>
+            {/* <p>Emotion: {response.predicted_emotion}</p> */}
             </div>
         )}
         </div>
