@@ -52,7 +52,7 @@ export default function Nav() {
   const menuItems = [
     { name: "Home", href: "./" },
     { name: "Chat Bot", href: "./home" },
-    { name: "About", href: "./about1" },
+    { name: "About", href: "./about" },
   ];
 
   return (
@@ -117,7 +117,7 @@ export default function Nav() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="./about1">
+            <Link color="foreground" href="./about">
               About
             </Link>
           </NavbarItem>
