@@ -123,6 +123,7 @@ export default function Nav() {
           </NavbarItem>
         </NavbarContent>
 
+
         {/* Right Actions */}
         <NavbarContent justify="end">
           {session || isGuest ? (
