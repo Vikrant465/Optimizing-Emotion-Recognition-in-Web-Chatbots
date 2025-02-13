@@ -12,8 +12,7 @@ const teamMembers = [
   {
     name: "Vikrant Singh",
     role: "Full Stack Developer",
-    photo: "/vik.jpg", // Replace with your image path
-
+    photo: "/vik.jpg",
     linkedin: "https://www.linkedin.com/in/vikrant172singh/",
   },
 ];

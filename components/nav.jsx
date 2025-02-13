@@ -52,7 +52,7 @@ export default function Nav() {
   const menuItems = [
     { name: "Home", href: "./" },
     { name: "Chat Bot", href: "./home" },
-    { name: "About", href: "./about" },
+    { name: "About", href: "./about1" },
   ];
 
   return (
@@ -93,7 +93,6 @@ export default function Nav() {
 
       {/* Navbar */}
       <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen} >
-
         <NavbarContent>
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -117,7 +116,7 @@ export default function Nav() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="./about">
+            <Link color="foreground" href="./about1">
               About
             </Link>
           </NavbarItem>
