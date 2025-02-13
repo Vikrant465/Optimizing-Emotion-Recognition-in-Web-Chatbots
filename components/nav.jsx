@@ -8,7 +8,7 @@ import {
   NavbarItem,
   Link,
   Button,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import {
   Modal,
   ModalContent,
@@ -17,7 +17,7 @@ import {
   ModalFooter,
   useDisclosure,
   Input,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useGuest } from "./GuestProvider";

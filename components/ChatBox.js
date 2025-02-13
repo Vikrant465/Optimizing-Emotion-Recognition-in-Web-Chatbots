@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useGuest } from "../components/GuestProvider";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/react";
+
 import axios from "axios";
 
 export default function ChatBox() {

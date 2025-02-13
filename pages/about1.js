@@ -1,6 +1,6 @@
 // eslint-disable react/no-unescaped-entities 
 
-import { Card, Skeleton, Accordion, AccordionItem } from "@nextui-org/react";
+import { Card, Skeleton, Accordion, AccordionItem } from "@heroui/react";
 import Nav from "../components/nav";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";

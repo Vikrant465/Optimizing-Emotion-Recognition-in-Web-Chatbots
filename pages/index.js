@@ -3,7 +3,7 @@ import Nav from "../components/nav";
 
 import { useSession, signOut } from "next-auth/react";
 
-import { Card, Skeleton, Accordion, AccordionItem } from "@nextui-org/react";
+import { Card, Skeleton, Accordion, AccordionItem } from "@heroui/react";
 
 import { motion } from "framer-motion";
 

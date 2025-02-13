@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import { GuestProvider } from "../components/GuestProvider";
 
 export default function App({ Component, pageProps }) {
@@ -8,9 +8,9 @@ export default function App({ Component, pageProps }) {
   return (
     <SessionProvider session={pageProps.session}>
       <GuestProvider>
-        <NextUIProvider>
+        <HeroUIProvider>
           <Component {...pageProps} />
-        </NextUIProvider>
+        </HeroUIProvider>
       </GuestProvider>
     </SessionProvider>
   );
