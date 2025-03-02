@@ -21,6 +21,24 @@ export default function ChatBox() {
     // Auto-scroll to the latest message
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+// Fetch chat history when user logs in
+  useEffect(() => {
+    const fetchChatHistory = async () => {
+      const email = session?.user?.email;
+      if (!email) return;
+
+      try {
+        const res = await axios.get(`/api/getChatHistory?email=${email}`);
+        setMessages(res.data.messages || []);
+      } catch (error) {
+        console.error("Error fetching chat history:", error);
+      }
+    };
+
+    if (session?.user?.email) {
+      fetchChatHistory();
+    }
+  }, [session]);
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -57,13 +75,20 @@ export default function ChatBox() {
       // DB setup
       const email = session?.user?.email;
       console.log("email : ",email)
-      // const timestamp1 = Date.now();
+    
       // DB access begin 
-      await axios.post("/api/hello",{
-        email,
-        user_msg: userInput,
-        AI_response: botResponse,
-      });
+      // await axios.post("/api/hello",{
+      //   email,
+      //   user_msg: userInput,
+      //   AI_response: botResponse,
+      // });
+      // if (email) {
+        await axios.post("/api/hello", {
+          email,
+          user_msg: userInput,
+          AI_response: botResponse,
+        });
+      // }
       
       console.log("Document added to MongoDB");
 
