@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect ,useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useGuest } from "../components/GuestProvider";
-import { Button } from "@heroui/react";
+import { Button,Input } from "@heroui/react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/react";
 
 import axios from "axios";
@@ -14,6 +14,13 @@ export default function ChatBox() {
   const [botemotion, setbotemotion] = useState("");
   const { data: session } = useSession();
   const { isGuest } = useGuest();
+
+ // Ref for auto-scrolling to the latest message
+  const chatEndRef = useRef(null);
+  useEffect(() => {
+    // Auto-scroll to the latest message
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -56,7 +63,6 @@ export default function ChatBox() {
         email,
         user_msg: userInput,
         AI_response: botResponse,
-        
       });
       
       console.log("Document added to MongoDB");
@@ -136,11 +142,13 @@ export default function ChatBox() {
                 {message.text}
               </div>
             ))}
+            {/* Auto-scroll reference */}
+            <div ref={chatEndRef} />
           </div>
 
           {/* Input Section */}
-          <div className="flex items-center p-2 border-t">
-            <input
+          <div className="flex items-center p-2 border-t gap-2">
+            <Input
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
@@ -148,13 +156,13 @@ export default function ChatBox() {
                 if (e.key === "Enter") handleSend();
               }}
               placeholder="Type a message..."
-              className="flex-1 p-3 border rounded-l-lg"
+              // className="flex-1 p-3 border rounded-l-lg"
             />
-            <Button onClick={handleSend} color="primary">
+            <Button onPress={handleSend} color="primary">
               Send
             </Button>
             <Button
-              onClick={handleVoiceInput}
+              onPress={handleVoiceInput}
               className={`p-3 rounded-full ${
                 isListening ? "bg-red-500" : "bg-gray-500"
               } text-white`}
@@ -162,6 +170,7 @@ export default function ChatBox() {
             >
               🎤
             </Button>
+            
           </div>
         </div>
       </div>
