@@ -21,9 +21,10 @@ export default function ChatBox() {
     // Auto-scroll to the latest message
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
 // Fetch chat history when user logs in
-  useEffect(() => {
-    const fetchChatHistory = async () => {
+  const handelpreviousmessages = async() => {
+    console.log("clicked")
       const email = session?.user?.email;
       if (!email) return;
 
@@ -33,12 +34,7 @@ export default function ChatBox() {
       } catch (error) {
         console.error("Error fetching chat history:", error);
       }
-    };
-
-    if (session?.user?.email) {
-      fetchChatHistory();
-    }
-  }, [session]);
+  };
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -173,6 +169,9 @@ export default function ChatBox() {
 
           {/* Input Section */}
           <div className="flex items-center p-2 border-t gap-2">
+            <Button onPress={handelpreviousmessages} color="primary">
+              Pre Chat
+            </Button>
             <Input
               type="text"
               value={userInput}
@@ -195,6 +194,7 @@ export default function ChatBox() {
             >
               🎤
             </Button>
+
             
           </div>
         </div>

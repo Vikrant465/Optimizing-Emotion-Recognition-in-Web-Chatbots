@@ -73,9 +73,9 @@ export default async function handler(req, res) {
   try {
     const client = await clientPromise;
     const db = client.db("Chat_emotion");
-    const collection = db.collection("email");
+    const collection = db.collection("chat_data");
 
-    const timestamp = new Date().toISOString();
+    const timestamp = new Date();
 
     const messageEntry = { sender: "user", text: user_msg, timestamp };
     const botResponseEntry = { sender: "bot", text: AI_response, timestamp };
