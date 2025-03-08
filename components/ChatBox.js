@@ -2,7 +2,7 @@ import { useState, useEffect ,useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useGuest } from "../components/GuestProvider";
 import { Button,Input } from "@heroui/react";
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@heroui/react";
+
 
 import axios from "axios";
 
