@@ -78,13 +78,13 @@ export default function ChatBox() {
       //   user_msg: userInput,
       //   AI_response: botResponse,
       // });
-      // if (email) {
+      if (email) {
         await axios.post("/api/hello", {
           email,
           user_msg: userInput,
           AI_response: botResponse,
         });
-      // }
+      }
       
       console.log("Document added to MongoDB");
 
