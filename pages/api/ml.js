@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { question } = req.body;
+  const { question,pre_chat } = req.body;
 
   if (!question) {
     return res.status(400).json({ error: "Question is required" });
@@ -18,7 +18,9 @@ export default async function handler(req, res) {
     if (!apiUrl) {
       throw new Error("External API URL is not defined in environment variables.");
     }
-    const response = await axios.post(apiUrl, { question });
+    const chatHistory = Array.isArray(pre_chat) ? pre_chat : [];
+    // const response = await axios.post(apiUrl, { question });
+    const response = await axios.post(apiUrl, { question, pre_chat: chatHistory });
 
     const { ai_response, user_predicted_emotion, predicted_emotion } = response.data;
 

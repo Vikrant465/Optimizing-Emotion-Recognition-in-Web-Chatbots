@@ -35,6 +35,18 @@ export default function ChatBox() {
         console.error("Error fetching chat history:", error);
       }
   };
+  const deletepreviousmessages = async() => {
+    console.log("clicked")
+      const email = session?.user?.email;
+      if (!email) return;
+
+      try {
+        const res = await axios.delete(`/api/getChatHistory?email=${email}`);
+        setMessages(res.data.messages || []);
+      } catch (error) {
+        console.error("Error fetching chat history:", error);
+      }
+  };
 
   // Speak the chatbot's response
   const speak = (text) => {
@@ -55,7 +67,14 @@ export default function ChatBox() {
     const newMessages = [...messages, { sender: "user", text: userInput }];
     setMessages(newMessages);
     try {
-      const res = await axios.post("/api/ml", { question: userInput });
+      const email = session?.user?.email;
+      console.log("email : ",email)
+      
+      const preres = await axios.get(`/api/getChatHistory?email=${email}`);
+      const pre_chat = preres.data.messages || [];
+      console.log("pre_chat : ",pre_chat)
+      
+      const res = await axios.post("/api/ml", { question: userInput , pre_chat: pre_chat});
       const botResponse = res.data.ai_response;
       console.log("res : ", res);
       // Add bot response to messages
@@ -69,15 +88,8 @@ export default function ChatBox() {
       // Speak the bot's response
       speak(botResponse); // Speak the response
       // DB setup
-      const email = session?.user?.email;
-      console.log("email : ",email)
     
       // DB access begin 
-      // await axios.post("/api/hello",{
-      //   email,
-      //   user_msg: userInput,
-      //   AI_response: botResponse,
-      // });
       if (email) {
         await axios.post("/api/hello", {
           email,
@@ -194,7 +206,9 @@ export default function ChatBox() {
             >
               🎤
             </Button>
-
+            <Button onPress={deletepreviousmessages} color="danger">
+              delete
+            </Button>
             
           </div>
         </div>
