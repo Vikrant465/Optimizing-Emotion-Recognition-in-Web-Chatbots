@@ -1,9 +1,8 @@
-import { useState, useEffect ,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useGuest } from "../components/GuestProvider";
-import { Button,Input } from "@heroui/react";
-
-
+import { Button, Input } from "@heroui/react";
+import {Alert} from "@heroui/alert";
 import axios from "axios";
 
 export default function ChatBox() {
@@ -15,37 +14,37 @@ export default function ChatBox() {
   const { data: session } = useSession();
   const { isGuest } = useGuest();
 
- // Ref for auto-scrolling to the latest message
+  // Ref for auto-scrolling to the latest message
   const chatEndRef = useRef(null);
   useEffect(() => {
     // Auto-scroll to the latest message
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-// Fetch chat history when user logs in
-  const handelpreviousmessages = async() => {
+  // Fetch chat history when user logs in
+  const handelpreviousmessages = async () => {
     console.log("clicked")
-      const email = session?.user?.email;
-      if (!email) return;
+    const email = session?.user?.email;
+    if (!email) return;
 
-      try {
-        const res = await axios.get(`/api/getChatHistory?email=${email}`);
-        setMessages(res.data.messages || []);
-      } catch (error) {
-        console.error("Error fetching chat history:", error);
-      }
+    try {
+      const res = await axios.get(`/api/getChatHistory?email=${email}`);
+      setMessages(res.data.messages || []);
+    } catch (error) {
+      console.error("Error fetching chat history:", error);
+    }
   };
-  const deletepreviousmessages = async() => {
+  const deletepreviousmessages = async () => {
     console.log("clicked")
-      const email = session?.user?.email;
-      if (!email) return;
+    const email = session?.user?.email;
+    if (!email) return;
 
-      try {
-        const res = await axios.delete(`/api/getChatHistory?email=${email}`);
-        setMessages(res.data.messages || []);
-      } catch (error) {
-        console.error("Error fetching chat history:", error);
-      }
+    try {
+      const res = await axios.delete(`/api/getChatHistory?email=${email}`);
+      setMessages(res.data.messages || []);
+    } catch (error) {
+      console.error("Error fetching chat history:", error);
+    }
   };
 
   // Speak the chatbot's response
@@ -61,6 +60,27 @@ export default function ChatBox() {
     }
   };
 
+  const checkSadEmotionStreak = async (email) => {
+    try {
+      const res = await axios.get(`/api/getChatHistory?email=${email}`);
+      const messages = res.data.messages || [];
+
+      const userMessages = messages
+        .filter(msg => msg.sender === "user" && msg.emotion)
+        .slice(-5); // Check last 5 user messages
+        console.log("userMessages : ", userMessages)
+      const isSadStreak = userMessages.length === 5 && userMessages.every(msg => msg.emotion === "sadness");
+      console.log("isSadStreak : ", isSadStreak)
+
+      if (isSadStreak) {
+        window.alert("Hey, it looks like you've been feeling sad. You're not alone—consider taking a break or talking to someone. ❤️");
+
+      }
+    } catch (err) {
+      console.error("Failed to check emotion streak", err);
+    }
+  };
+
   const handleSend = async () => {
     if (!userInput.trim()) return;
     // Add user message
@@ -68,15 +88,15 @@ export default function ChatBox() {
     setMessages(newMessages);
     try {
       const email = session?.user?.email;
-      console.log("email : ",email)
-      
+      console.log("email : ", email)
+
       const preres = await axios.get(`/api/getChatHistory?email=${email}`);
       const pre_chat = preres.data.messages || [];
-      console.log("pre_chat : ",pre_chat)
-      
-      const res = await axios.post("/api/ml", { question: userInput , pre_chat: pre_chat});
+      console.log("pre_chat : ", pre_chat)
+
+      const res = await axios.post("/api/ml", { question: userInput, pre_chat: pre_chat });
       const botResponse = res.data.ai_response;
-      console.log("res : ", res.data);
+      // console.log("res : ", res.data);
       // Add bot response to messages
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -84,21 +104,23 @@ export default function ChatBox() {
       ]);
       setuseremotion(res.data.user_predicted_emotion);
       setbotemotion(res.data.predicted_emotion);
-    
+
       // Speak the bot's response
       speak(botResponse); // Speak the response
       // DB setup
-    
+
       // DB access begin 
       if (email) {
         await axios.post("/api/hello", {
           email,
           user_msg: userInput,
           AI_response: botResponse,
-          UserEmotion:res.data.user_predicted_emotion
+          UserEmotion: res.data.user_predicted_emotion
         });
+        // checking for sad emotion streak
+        const flag = await checkSadEmotionStreak(email);
+        console.log("flag : ", flag)
       }
-      
       console.log("Document added to MongoDB");
 
     } catch (err) {
@@ -167,11 +189,10 @@ export default function ChatBox() {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`mb-4 p-3 max-w-xs ${
-                  message.sender === "user"
+                className={`mb-4 p-3 max-w-xs ${message.sender === "user"
                     ? "bg-blue-300 self-start text-left rounded-r-lg"
                     : "bg-response self-end text-right rounded-l-lg"
-                }`}
+                  }`}
               >
                 {message.text}
               </div>
@@ -193,16 +214,15 @@ export default function ChatBox() {
                 if (e.key === "Enter") handleSend();
               }}
               placeholder="Type a message..."
-              // className="flex-1 p-3 border rounded-l-lg"
+            // className="flex-1 p-3 border rounded-l-lg"
             />
             <Button onPress={handleSend} color="primary">
               Send
             </Button>
             <Button
               onPress={handleVoiceInput}
-              className={`p-3 rounded-full ${
-                isListening ? "bg-red-500" : "bg-gray-500"
-              } text-white`}
+              className={`p-3 rounded-full ${isListening ? "bg-red-500" : "bg-gray-500"
+                } text-white`}
               title="Hold to speak"
             >
               🎤
@@ -210,7 +230,7 @@ export default function ChatBox() {
             <Button onPress={deletepreviousmessages} color="danger">
               delete
             </Button>
-            
+
           </div>
         </div>
       </div>

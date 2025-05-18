@@ -50,8 +50,8 @@ async function getChatHistory(req, res) {
     //   ?.filter(msg => msg.sender === "user" && msg.User_MSG)
     //   ?.map(msg => msg.User_MSG)
     //   ?.slice(-10) || [];
-    res.status(200).json({ success: true, messages: lastFiveMessages });
     // res.status(200).json({ success: true, messages: userMessages });
+    res.status(200).json({ success: true, messages: lastFiveMessages });
   } catch (error) {
     console.error("MongoDB Retrieval Error:", error);
     res.status(500).json({ success: false, message: "Database error" });

@@ -47,6 +47,9 @@ export default function Home1() {
     checkRecoveryEmail();
   }, [session, isGuest]);
 
+
+
+
   const handleRecoverySubmit = async () => {
     if (!recoveryEmail || !session?.user?.email) return;
     try {
@@ -61,7 +64,7 @@ export default function Home1() {
     }
   };
 
-  
+
   if (!session && !isGuest) {
     return (
       <div className="relative bg-about1 bg-no-repeat bg-cover bg-center p-5 h-screen justify-items-center ">
