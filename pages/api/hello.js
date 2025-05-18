@@ -64,7 +64,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, message: "Method not allowed" });
   }
 
-  const { email, user_msg, AI_response } = req.body;
+  const { email, user_msg, AI_response ,UserEmotion } = req.body;
 
   if (!email || !user_msg || !AI_response) {
     return res.status(400).json({ success: false, message: "Missing required fields" });
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
 
     const timestamp = new Date();
 
-    const messageEntry = { sender: "user", text: user_msg, timestamp };
+    const messageEntry = { sender: "user", text: user_msg, emotion: UserEmotion, timestamp };
     const botResponseEntry = { sender: "bot", text: AI_response, timestamp };
 
     await collection.updateOne(

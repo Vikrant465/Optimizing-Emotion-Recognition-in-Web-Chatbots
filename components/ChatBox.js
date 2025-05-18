@@ -76,7 +76,7 @@ export default function ChatBox() {
       
       const res = await axios.post("/api/ml", { question: userInput , pre_chat: pre_chat});
       const botResponse = res.data.ai_response;
-      console.log("res : ", res);
+      console.log("res : ", res.data);
       // Add bot response to messages
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -95,6 +95,7 @@ export default function ChatBox() {
           email,
           user_msg: userInput,
           AI_response: botResponse,
+          UserEmotion:res.data.user_predicted_emotion
         });
       }
       

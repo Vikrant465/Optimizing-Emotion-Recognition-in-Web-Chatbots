@@ -44,8 +44,14 @@ async function getChatHistory(req, res) {
     const db = client.db("Chat_emotion");
     const collection = db.collection("chat_data");
     const userChats = await collection.findOne({ email });
+
     const lastFiveMessages = userChats?.messages?.slice(-10) || [];
+    // const userMessages = userChats?.messages
+    //   ?.filter(msg => msg.sender === "user" && msg.User_MSG)
+    //   ?.map(msg => msg.User_MSG)
+    //   ?.slice(-10) || [];
     res.status(200).json({ success: true, messages: lastFiveMessages });
+    // res.status(200).json({ success: true, messages: userMessages });
   } catch (error) {
     console.error("MongoDB Retrieval Error:", error);
     res.status(500).json({ success: false, message: "Database error" });
@@ -72,7 +78,7 @@ async function deleteLastMessages(req, res) {
     }
 
     // Remove the last 5 messages
-    const updatedMessages = userChats.messages.slice(0, -5);
+    const updatedMessages = userChats.messages.slice(0, -2);
 
     // Update the database
     await collection.updateOne(
