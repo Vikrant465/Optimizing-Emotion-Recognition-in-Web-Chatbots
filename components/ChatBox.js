@@ -75,7 +75,7 @@ export default function ChatBox() {
       if (isSadStreak) {
         const userInfor = await axios.get(`/api/recovery_email?email=${email}`);
         const recoveryEmail = userInfor.data.recovery_email;
-        console.log("recoveryEmail : ", recoveryEmail)
+        // console.log("recoveryEmail : ", recoveryEmail)
         if (recoveryEmail) {
           await axios.post("/api/sendAlertEmail", {
             to: recoveryEmail,
