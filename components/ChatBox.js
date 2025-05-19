@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useGuest } from "../components/GuestProvider";
 import { Button, Input } from "@heroui/react";
-import {Alert} from "@heroui/alert";
+import { Alert } from "@heroui/alert";
 import axios from "axios";
 
 export default function ChatBox() {
@@ -68,12 +68,23 @@ export default function ChatBox() {
       const userMessages = messages
         .filter(msg => msg.sender === "user" && msg.emotion)
         .slice(-5); // Check last 5 user messages
-        console.log("userMessages : ", userMessages)
+      console.log("userMessages : ", userMessages)
       const isSadStreak = userMessages.length === 5 && userMessages.every(msg => msg.emotion === "sadness");
       console.log("isSadStreak : ", isSadStreak)
 
       if (isSadStreak) {
-        window.alert("Hey, it looks like you've been feeling sad. You're not alone—consider taking a break or talking to someone. ❤️");
+        const userInfor = await axios.get(`/api/recovery_email?email=${email}`);
+        const recoveryEmail = userInfor.data.recovery_email;
+        console.log("recoveryEmail : ", recoveryEmail)
+        if (recoveryEmail) {
+          await axios.post("/api/sendAlertEmail", {
+            to: recoveryEmail,
+            userName: session?.user?.name,
+          });
+          console.log("Sad streak detected. Email sent to recovery contact.");
+        } else {
+          window.alert("Hey, it looks like you've been feeling sad. You're not alone—consider taking a break or talking to someone. ❤️");
+        }
 
       }
     } catch (err) {
@@ -190,8 +201,8 @@ export default function ChatBox() {
               <div
                 key={index}
                 className={`mb-4 p-3 max-w-xs ${message.sender === "user"
-                    ? "bg-blue-300 self-start text-left rounded-r-lg"
-                    : "bg-response self-end text-right rounded-l-lg"
+                  ? "bg-blue-300 self-start text-left rounded-r-lg"
+                  : "bg-response self-end text-right rounded-l-lg"
                   }`}
               >
                 {message.text}

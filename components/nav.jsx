@@ -140,7 +140,7 @@ export default function Nav() {
                   as="button"
                   color="danger"
                   variant="flat"
-                  onClick={handleLogout}
+                  onPress={handleLogout}
                 >
                   Logout
                 </Button>
@@ -153,7 +153,7 @@ export default function Nav() {
                   as="button"
                   color="primary"
                   variant="flat"
-                  onClick={() => signIn("google")}
+                  onPress={() => signIn("google")}
                 >
                   Login with Google
                 </Button>
@@ -163,7 +163,7 @@ export default function Nav() {
                   as="button"
                   color="primary"
                   variant="flat"
-                  onClick={handleGuestLogin}
+                  onPress={handleGuestLogin}
                 >
                   Guest Login
                 </Button>
