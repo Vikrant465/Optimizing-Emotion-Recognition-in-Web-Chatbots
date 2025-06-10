@@ -191,6 +191,7 @@ export default function ChatBox() {
   };
   const emotions = Object.keys(emotionImages);
 
+  
   return (
     <div className=" h-screen flex">
       <div className="w-2/3">
